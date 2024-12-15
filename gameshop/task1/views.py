@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from .forms import UserRegister
 from .models import Buyer, Game
-# Create your views here.
+from django.core.paginator import Paginator
+from .models import News
 
 
 def games_view(request):
@@ -45,6 +46,20 @@ def sign_up_by_django(request):
                               {'message': f'Приветствуем, {username}!'})
     info['form'] = form
     return render(request, 'first_task/registration_page.html', info)
+
+
+def news_view(request):
+    news_list = News.objects.all().order_by('-date')  # Сортируем по дате
+    paginator = Paginator(news_list, 10)  # 10 новостей на странице
+
+    page_number = request.GET.get('page')  # Получаем номер страницы
+    page_obj = paginator.get_page(page_number)  # Получаем объекты для текущей страницы
+
+    context = {
+        'news': page_obj,
+    }
+
+    return render(request, 'first_task/news.html', context)
 
 #  Убрал регистрацию по html
 # def sign_up_by_html(request):
