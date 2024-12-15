@@ -61,6 +61,7 @@ def news_view(request):
 
     return render(request, 'first_task/news.html', context)
 
+
 #  Убрал регистрацию по html
 # def sign_up_by_html(request):
 #     info = {}

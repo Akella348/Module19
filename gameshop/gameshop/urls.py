@@ -27,3 +27,4 @@ urlpatterns = [
     path('platform/cart/', TemplateView.as_view(template_name='first_task/cart.html')),
     path('platform/news/', news_view, name='news'),
 ]
+
